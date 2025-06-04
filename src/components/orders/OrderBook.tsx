@@ -70,7 +70,7 @@ export const OrderBook = ({ selectedCoin }: { selectedCoin: string }) => {
 					{orders.bids.length === 0 ? (
 						<p>No order history yet</p>
 					) : (
-						<div className="grid grid-cols-2 gap-6 text-xs font-mono">
+						<div className="grid grid-cols-2 md:gap-6 gap-2 text-xs font-mono">
 							<div>
 								<h3 className="font-semibold mb-1">Bids</h3>
 								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
@@ -109,7 +109,7 @@ export const OrderBook = ({ selectedCoin }: { selectedCoin: string }) => {
 					{orders.bids.length === 0 ? (
 						<p>No trade history yet</p>
 					) : (
-						<div className="grid grid-cols-3 gap-6 text-xs font-mono">
+						<div className="grid grid-cols-3 md:gap-6 gap-2 text-xs font-mono">
 							<div>
 								<h3 className="font-semibold mb-1">Bids</h3>
 								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">

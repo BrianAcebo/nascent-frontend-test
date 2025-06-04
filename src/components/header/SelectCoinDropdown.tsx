@@ -26,7 +26,7 @@ export default function SelectCoinDropdown() {
 			<Dropdown
 				isOpen={isOpen}
 				onClose={closeDropdown}
-				className="absolute mt-[17px] flex flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-900 sm:w-[361px] left-0"
+				className="absolute mt-[17px] min-w-36 flex flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-900 sm:w-[361px] left-0"
 			>
 				<button
 					onClick={() => {
