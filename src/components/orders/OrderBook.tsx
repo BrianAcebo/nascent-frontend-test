@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import ComponentCard from '../common/ComponentCard'
-import { useSelectedCoin } from '../../context/SelectedCoinContext'
 import { generateRandomTimes } from '../../utils'
 
 type Orders = {
@@ -8,8 +7,7 @@ type Orders = {
 	asks: [number, number][]
 }
 
-export const OrderBook = () => {
-	const { selectedCoin } = useSelectedCoin()
+export const OrderBook = ({ selectedCoin }: { selectedCoin: string }) => {
 	const [activeTab, setActiveTab] = useState<'orders' | 'trades'>('orders')
 	const [orders, setOrders] = useState<Orders>({ bids: [], asks: [] })
 	const [loading, setLoading] = useState(true)
@@ -68,84 +66,98 @@ export const OrderBook = () => {
 			{error && <p className="text-sm text-red-500">Error: {error}</p>}
 
 			{!loading && !error && activeTab === 'orders' && (
-				<div className="grid grid-cols-2 gap-6 text-xs font-mono">
-					<div>
-						<h3 className="font-semibold mb-1">Bids</h3>
-						<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
-							{orders.bids.map(([price, amount], index) => (
-								<li
-									key={`bid-${index}`}
-									className="flex justify-between"
-								>
-									<span>{Number(amount).toFixed(8)}</span>
-									<span>{Number(price).toFixed(2)}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-					<div>
-						<h3 className="text-green-400 font-semibold mb-1">Asks</h3>
-						<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
-							{orders.asks.map(([price, amount], index) => (
-								<li
-									key={`bid-${index}`}
-									className="flex justify-between text-green-400"
-								>
-									<span>{Number(amount).toFixed(8)}</span>
-									<span>{Number(price).toFixed(2)}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-				</div>
+				<>
+					{orders.bids.length === 0 ? (
+						<p>No order history yet</p>
+					) : (
+						<div className="grid grid-cols-2 gap-6 text-xs font-mono">
+							<div>
+								<h3 className="font-semibold mb-1">Bids</h3>
+								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
+									{orders.bids.map(([price, amount], index) => (
+										<li
+											key={`bid-${index}`}
+											className="flex justify-between"
+										>
+											<span>{Number(amount).toFixed(8)}</span>
+											<span>{Number(price).toFixed(2)}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+							<div>
+								<h3 className="text-green-400 font-semibold mb-1">Asks</h3>
+								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
+									{orders.asks.map(([price, amount], index) => (
+										<li
+											key={`bid-${index}`}
+											className="flex justify-between text-green-400"
+										>
+											<span>{Number(amount).toFixed(8)}</span>
+											<span>{Number(price).toFixed(2)}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					)}
+				</>
 			)}
 
 			{!loading && !error && activeTab === 'trades' && (
-				<div className="grid grid-cols-3 gap-6 text-xs font-mono">
-					<div>
-						<h3 className="font-semibold mb-1">Bids</h3>
-						<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
-							{orders.bids.map(([price, amount], index) => (
-								<li
-									key={`bid-${index}`}
-									className="flex justify-between"
-								>
-									<span>{Number(amount).toFixed(8)}</span>
-									<span>{Number(price).toFixed(2)}</span>
-								</li>
-							))}
-						</ul>
-					</div>
+				<>
+					{orders.bids.length === 0 ? (
+						<p>No trade history yet</p>
+					) : (
+						<div className="grid grid-cols-3 gap-6 text-xs font-mono">
+							<div>
+								<h3 className="font-semibold mb-1">Bids</h3>
+								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
+									{orders.bids.map(([price, amount], index) => (
+										<li
+											key={`bid-${index}`}
+											className="flex justify-between"
+										>
+											<span>{Number(amount).toFixed(8)}</span>
+											<span>{Number(price).toFixed(2)}</span>
+										</li>
+									))}
+								</ul>
+							</div>
 
-					<div>
-						<h3 className="text-green-400 font-semibold mb-1">Asks</h3>
-						<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
-							{orders.asks.map(([price, amount], index) => (
-								<li
-									key={`ask-${index}`}
-									className="flex justify-between text-green-400"
-								>
-									<span>{Number(amount).toFixed(8)}</span>
-									<span>{Number(price).toFixed(2)}</span>
-								</li>
-							))}
-						</ul>
-					</div>
+							<div>
+								<h3 className="text-green-400 font-semibold mb-1">Asks</h3>
+								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
+									{orders.asks.map(([price, amount], index) => (
+										<li
+											key={`ask-${index}`}
+											className="flex justify-between text-green-400"
+										>
+											<span>{Number(amount).toFixed(8)}</span>
+											<span>{Number(price).toFixed(2)}</span>
+										</li>
+									))}
+								</ul>
+							</div>
 
-					<div>
-						<h3 className="text-red-400 font-semibold mb-1">Time</h3>
-						<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
-							{generateRandomTimes(orders.bids.length).map((time, index) => (
-								<li
-									key={`time-${index}`}
-									className="flex justify-end text-red-400"
-								>
-									<span>{time}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-				</div>
+							<div>
+								<h3 className="text-red-400 font-semibold mb-1">Time</h3>
+								<ul className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar overscroll-contain">
+									{generateRandomTimes(orders.bids.length).map(
+										(time, index) => (
+											<li
+												key={`time-${index}`}
+												className="flex justify-start text-red-400"
+											>
+												<span>{time}</span>
+											</li>
+										)
+									)}
+								</ul>
+							</div>
+						</div>
+					)}
+				</>
 			)}
 		</ComponentCard>
 	)

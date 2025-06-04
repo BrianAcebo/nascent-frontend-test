@@ -74,7 +74,6 @@ export const OrderForm: React.FC = () => {
 			}))
 
 			setHasErrors(true)
-
 			return
 		}
 
@@ -90,7 +89,6 @@ export const OrderForm: React.FC = () => {
 			}))
 
 			setHasErrors(true)
-
 			return
 		}
 
@@ -173,7 +171,14 @@ export const OrderForm: React.FC = () => {
 						<div className="flex flex-col gap-2">
 							<Label>Limit price</Label>
 							<div className="relative">
+								<p
+									className="sr-only"
+									data-testid="limit-error"
+								>
+									{errors.limit.hint}
+								</p>
 								<Input
+									aria-invalid={errors.limit.hasError}
 									placeholder="105056"
 									type="number"
 									className="pl-[80px] no-input-number-arrows"
@@ -206,7 +211,14 @@ export const OrderForm: React.FC = () => {
 					<div className="flex flex-col gap-2">
 						<Label>Amount</Label>
 						<div className="relative">
+							<p
+								className="sr-only"
+								data-testid="amount-error"
+							>
+								{errors.amount.hint}
+							</p>
 							<Input
+								aria-invalid={errors.amount.hasError}
 								placeholder="0.0000000"
 								type="number"
 								className="pl-[80px] no-input-number-arrows"
@@ -289,6 +301,7 @@ export const OrderForm: React.FC = () => {
 					</div>
 
 					<Button
+						dataTestId="submit-button"
 						disabled={hasErrors}
 						className="mx-auto block"
 					>
