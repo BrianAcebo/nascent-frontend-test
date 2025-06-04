@@ -1,9 +1,11 @@
 # NASCENT TAKE HOME TEST
 
 ## Assignment
+
 Please thoroughly review the provided Assignment requirements PDF for the description.
 
 ## Candidate Notes
+
 Please add any notes here.
 
 ## About the Template
@@ -53,3 +55,29 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Candidate Notes
+
+> **Candidate:** Brian Acebo
+
+---
+
+## 🧪 Tech Stack
+
+React + TypeScript
+Tailwind CSS
+ApexCharts (with test mock for JSDOM)
+Jest & React Testing Library
+Context API
+
+---
+
+## 🚀 Features
+
+- Fully responsive tab-based order form interface
+- Candlestick chart powered by `react-apexcharts`
+- Real-time order book data simulation
+- Trade history view
+- Clean, accessible UI using Tailwind CSS
+- Component-level state management via Context API
+- Tests written in Jest + React Testing Library
