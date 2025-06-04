@@ -4,13 +4,16 @@ import './index.css'
 import App from './App'
 import { AppWrapper } from './components/common/PageMeta'
 import { ThemeProvider } from './context/ThemeContext'
+import { SelectedCoinProvider } from './context/SelectedCoinContext'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<ThemeProvider>
-			<AppWrapper>
-				<App />
-			</AppWrapper>
+			<SelectedCoinProvider>
+				<AppWrapper>
+					<App />
+				</AppWrapper>
+			</SelectedCoinProvider>
 		</ThemeProvider>
 	</StrictMode>
 )

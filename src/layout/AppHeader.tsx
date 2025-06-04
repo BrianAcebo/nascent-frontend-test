@@ -7,10 +7,12 @@ import NotificationDropdown from '../components/header/NotificationDropdown'
 import UserDropdown from '../components/header/UserDropdown'
 import { PortfolioButton } from '../components/common/PortfolioButton'
 import CommandPalette from '../components/common/CommandPalette'
+import SelectCoinDropdown from '../components/header/SelectCoinDropdown'
 
 const AppHeader: React.FC = () => {
 	const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false)
 	const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar()
+	const headerRef = useRef<HTMLElement>(null)
 
 	const handleToggle = () => {
 		if (window.innerWidth >= 1024) {
@@ -27,6 +29,27 @@ const AppHeader: React.FC = () => {
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
+		// Set CSS variable of header's height
+		const el = headerRef.current
+		if (!el) {
+			return
+		}
+
+		const updateHeight = () => {
+			const height = el.offsetHeight
+			document.documentElement.style.setProperty(
+				'--header-height',
+				`${height}px`
+			)
+		}
+
+		updateHeight()
+
+		const observer = new ResizeObserver(updateHeight)
+		observer.observe(el)
+
+		window.addEventListener('load', updateHeight)
+
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
 				event.preventDefault()
@@ -37,12 +60,17 @@ const AppHeader: React.FC = () => {
 		document.addEventListener('keydown', handleKeyDown)
 
 		return () => {
+			observer.disconnect()
+			window.removeEventListener('load', updateHeight)
 			document.removeEventListener('keydown', handleKeyDown)
 		}
 	}, [])
 
 	return (
-		<header className="sticky top-0 flex w-full bg-white border-gray-200 z-999 dark:border-gray-800 dark:bg-gray-900 lg:border-b">
+		<header
+			ref={headerRef}
+			className="sticky top-0 flex w-full bg-white border-gray-200 z-999 dark:border-gray-800 dark:bg-gray-900 lg:border-b"
+		>
 			<div className="flex flex-col items-center justify-between grow lg:flex-row lg:px-6">
 				<div className="flex items-center justify-between w-full gap-2 px-3 py-3 border-b border-gray-200 dark:border-gray-800 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4">
 					<button
@@ -83,6 +111,9 @@ const AppHeader: React.FC = () => {
 						)}
 						{/* Cross Icon */}
 					</button>
+
+					<SelectCoinDropdown />
+
 					<Link
 						to="/"
 						className="lg:hidden"
