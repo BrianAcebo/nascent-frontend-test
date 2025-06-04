@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
 import { useTheme } from '../../context/ThemeContext'
+import ComponentCard from '../common/ComponentCard'
 
 export const CandlestickChart: React.FC = () => {
 	const { theme } = useTheme()
@@ -319,34 +320,39 @@ export const CandlestickChart: React.FC = () => {
 	}
 
 	return (
-		<div className="border border-gray-200 dark:border-gray-800 p-5">
-			<div className="flex gap-3 items-center max-w-xs">
-				<button
-					onClick={() => handleChangeTab('price')}
-					className={`menu-item text-center justify-center text-sm ${
-						activeTab === 'price' ? 'menu-item-active' : 'menu-item-inactive'
-					}`}
-				>
-					Price Chart
-				</button>
-				<button
-					onClick={() => handleChangeTab('depth')}
-					className={`menu-item text-center justify-center text-sm ${
-						activeTab === 'depth' ? 'menu-item-active' : 'menu-item-inactive'
-					}`}
-				>
-					Depth Chart
-				</button>
+		<ComponentCard
+			title="Day View"
+			className="w-full"
+		>
+			<div className="w-full">
+				<div className="flex gap-3 items-center max-w-xs">
+					<button
+						onClick={() => handleChangeTab('price')}
+						className={`menu-item text-center justify-center text-sm ${
+							activeTab === 'price' ? 'menu-item-active' : 'menu-item-inactive'
+						}`}
+					>
+						Price Chart
+					</button>
+					<button
+						onClick={() => handleChangeTab('depth')}
+						className={`menu-item text-center justify-center text-sm ${
+							activeTab === 'depth' ? 'menu-item-active' : 'menu-item-inactive'
+						}`}
+					>
+						Depth Chart
+					</button>
+				</div>
+				<div id="chart">
+					<ReactApexChart
+						options={options.options}
+						series={options.series}
+						type="candlestick"
+						height={350}
+					/>
+				</div>
+				<div id="html-dist"></div>
 			</div>
-			<div id="chart">
-				<ReactApexChart
-					options={options.options}
-					series={options.series}
-					type="candlestick"
-					height={350}
-				/>
-			</div>
-			<div id="html-dist"></div>
-		</div>
+		</ComponentCard>
 	)
 }

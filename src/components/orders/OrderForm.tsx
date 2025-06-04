@@ -139,8 +139,8 @@ export const OrderForm: React.FC = () => {
 						}}
 						className={`text-gray-500 border border-t-2 text-xs w-1/2 py-2 border-gray-200 dark:border-gray-800 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors ${
 							activeTab === 'buy'
-								? 'bg-gray-600 dark:bg-gray-900 border-t-success-500 dark:border-t-success-500 text-white'
-								: 'bg-gray-400 dark:bg-gray-800'
+								? 'bg-gray-400 dark:bg-gray-900 border-t-success-500 dark:border-t-success-500 text-white'
+								: 'bg-gray-200 dark:bg-gray-800'
 						}`}
 					>
 						BUY
@@ -152,8 +152,8 @@ export const OrderForm: React.FC = () => {
 						}}
 						className={`text-gray-500 border border-t-2 text-xs border-gray-200 w-1/2 py-2 dark:border-gray-800 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors ${
 							activeTab === 'sell'
-								? 'bg-gray-600 dark:bg-gray-900 border-t-success-500 dark:border-t-success-500 text-white'
-								: 'bg-gray-400 dark:bg-gray-800'
+								? 'bg-gray-400 dark:bg-gray-900 border-t-success-500 dark:border-t-success-500 text-white'
+								: 'bg-gray-200 dark:bg-gray-800'
 						}`}
 					>
 						SELL
