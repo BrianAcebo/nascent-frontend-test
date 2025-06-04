@@ -1,13 +1,89 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+	:root {
+		--font-outfit: 'Outfit', sans-serif;
+		--breakpoint-2xsm: 375px;
+		--breakpoint-xsm: 425px;
+		--breakpoint-3xl: 2000px;
+
+		--color-brand-500: #465fff;
+		--color-gray-200: #e4e7ec;
+		--color-gray-50: #f9fafb;
+	}
+
+	body {
+		@apply font-outfit bg-gray-50 text-gray-900;
+	}
+
+	*,
+	::before,
+	::after {
+		border-color: var(--color-gray-200, currentColor);
+	}
+
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+	.menu-item {
+		@apply relative flex items-center w-full gap-3 px-3 py-3 font-medium rounded-full;
+	}
+
+	.menu-item-active {
+		@apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+	}
+
+	.menu-item-inactive {
+		@apply text-gray-700 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+	}
+
+	.menu-item-icon {
+		@apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400;
+	}
+
+	.menu-item-icon-active {
+		@apply text-brand-500 dark:text-brand-400;
+	}
+
+	.menu-item-icon svg {
+		@apply size-6;
+	}
+
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar {
+		@apply size-1.5;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		@apply bg-gray-200 rounded-full dark:bg-gray-700;
+	}
+
+	.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+		background-color: #344054;
+	}
+}
+
+@layer utilities {
+	input[type='date']::-webkit-inner-spin-button,
+	input[type='time']::-webkit-inner-spin-button,
+	input[type='date']::-webkit-calendar-picker-indicator,
+	input[type='time']::-webkit-calendar-picker-indicator {
+		display: none;
+		-webkit-appearance: none;
+	}
 }
