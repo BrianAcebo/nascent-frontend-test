@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid')
 
 const app = express()
 const port = 3001
+const NODE_ENV = process.env.NODE_ENV || 3000
 
 const btcOrderbook = require('./data/btc_orderbook.json')
 const ethOrderbook = require('./data/eth_orderbook.json')
@@ -82,8 +83,13 @@ app.post('/trade/', (req, res) => {
 	})
 })
 
-app.listen(port, () => {
-	console.log(`Mock server listening on port ${port}`)
-})
-
-module.exports = app
+// Start the server only in development mode
+// In production, this server is ran by Vercel
+if (NODE_ENV === 'development') {
+	app.listen(port, () => {
+		console.log(`Mock server listening on port ${port}`)
+	})
+}
+if (NODE_ENV === 'production') {
+	module.exports = app
+}
